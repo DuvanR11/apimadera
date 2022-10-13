@@ -4,7 +4,7 @@ from .models import *
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ('id', 'username', 'apellidos', 'correo', 'direccion', 'numero', 'imagen', 'created_at', 'updated_at')
+        fields = ('id', 'username', 'apellidos', 'correo', 'direccion', 'numero', 'imagen')
         
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,5 +23,5 @@ class CotizacionSerializer(serializers.ModelSerializer):
         
 class ForoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cotizacion
+        model = Foro
         fields = ('id', 'idUsuario', 'descripcion', 'created_at', 'updated_at')
