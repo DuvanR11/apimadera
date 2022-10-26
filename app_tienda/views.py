@@ -1,4 +1,8 @@
 from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.parsers import JSONParser, MultiPartParser
+from rest_framework.response import Response
 from .models import *
 from . serializers import *
 # Create your views here.
@@ -32,7 +36,14 @@ class ProductosList(generics.ListCreateAPIView):
 class ProductosDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Productos.objects.all()
     serializer_class = ProductosSerializer
+
+class FiltroProductos(generics.ListCreateAPIView):
+    model = Productos
+    serializer_class = ProductosSerializer
     
+    def get_queryset(self):
+        return self.get_serializer().Meta.model.objects.filter(idCategoria=self.kwargs['pk'])
+
 # --------------COTIZACIÓN-----------------------
 class CotizacionList(generics.ListCreateAPIView):
     queryset = Cotizacion.objects.all()

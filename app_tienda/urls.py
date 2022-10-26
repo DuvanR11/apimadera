@@ -1,8 +1,9 @@
-from django.urls import re_path
+from django.urls import re_path, path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
 urlpatterns = [
     # Usuario
     re_path(r'^usuario$', views.UsuarioList.as_view()),
@@ -23,5 +24,8 @@ urlpatterns = [
     # Foro
     re_path(r'^foro$', views.ForoList.as_view()),
     re_path(r'^foro/(?P<pk>[0-9]+)$', views.ForoDetail.as_view()),
+    
+    re_path(r'^filtro/(?P<pk>[0-9]+)$', views.FiltroProductos.as_view()),
+    
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
